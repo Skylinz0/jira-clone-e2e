@@ -19,6 +19,41 @@ describe('Issue filtering', () => {
     cy.get('[data-testid="list-issue"]').should('have.length', '1');
   });
 
+  const dataForSearch = [
+    {
+      issueName: 'multiple assignees',
+      expectedAmountOfIssues: '1',
+    },
+    {
+      issueName: 'you can',
+      expectedAmountOfIssues: '2',
+    },
+    {
+      issueName: 'an issue',
+      expectedAmountOfIssues: '3',
+    }
+  ];
+
+  // Task #1 for..of
+
+  for (let issue of dataForSearch) {
+    it(`Should filter issues by title: ${issue.issueName}`, () => {
+      getSearchInput().debounced('type', issue.issueName);
+      cy.get('[data-testid="list-issue"]')
+        .should('have.length', issue.expectedAountOfIssues);
+    });
+  };
+
+  // Task #2 forEach
+
+  it(`Should filter issues by title: `, () => {
+    dataForSearch.forEach(issue => {
+      getSearchInput().clear().debounced('type', issue.issueName);
+      cy.get('[data-testid="list-issue"]')
+        .should('have.length', issue.expectedAmountOfIssues);
+    });
+  });
+
   /**
    * New tests can be created here for practice
    * 1. Filter by avatar
@@ -26,5 +61,7 @@ describe('Issue filtering', () => {
    * 3. Filter by "Recently Updated" button
    */
 
-  const getSearchInput = () => cy.get('[data-testid="board-filters"]').find('input');
+  function getSearchInput() {
+  return cy.get('[data-testid="board-filters"]').find('input');
+}
 });
