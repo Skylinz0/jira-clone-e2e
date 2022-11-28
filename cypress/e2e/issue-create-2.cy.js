@@ -2,11 +2,12 @@ describe('Issue create', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.intercept('GET','**/currentUser').as('currentUserApiRequest')
-    cy.url().should('eq', 'https://jira.ivorreic.com/project').then((url) => {
+    cy.url().should('eq', `${Cypress.env('baseUrl')}project/board`).then((url) => {
       cy.wait('@currentUserApiRequest')
       cy.visit(url + '/settings?modal-issue-create=true');
     });
   });
+
 
   it('Should create an issue and validate it successfully', () => {
     cy.get('[data-testid="modal:issue-create"]').within(() => {
@@ -38,7 +39,7 @@ describe('Issue create', () => {
     });
   });
 
-  it.skip('Should validate title is required field if missing', () => {
+  it('Should validate title is required field if missing', () => {
     cy.get('[data-testid="modal:issue-create"]').within(() => {
       cy.get('[data-testid="select:reporterId"]').children().then(()=>{
         cy.get('button[type="submit"]').click();

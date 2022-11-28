@@ -39,8 +39,7 @@ describe('Issue filtering', () => {
   for (let issue of dataForSearch) {
     it(`Should filter issues by title: ${issue.issueName}`, () => {
       getSearchInput().debounced('type', issue.issueName);
-      cy.get('[data-testid="list-issue"]')
-        .should('have.length', issue.expectedAountOfIssues);
+      cy.get('[data-testid="list-issue"]').should('have.length',issue.expectedAmountOfIssues);
     });
   };
 
@@ -49,8 +48,7 @@ describe('Issue filtering', () => {
   it(`Should filter issues by title: `, () => {
     dataForSearch.forEach(issue => {
       getSearchInput().clear().debounced('type', issue.issueName);
-      cy.get('[data-testid="list-issue"]')
-        .should('have.length', issue.expectedAmountOfIssues);
+      cy.get('[data-testid="list-issue"]').should('have.length', issue.expectedAmountOfIssues);
     });
   });
 

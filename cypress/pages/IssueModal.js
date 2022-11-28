@@ -3,7 +3,7 @@ class IssueModal {
         this.issueModal = '[data-testid="modal:issue-create"]';
         this.issueType = '[data-testid="select:type"]';
         this.issueTypeStory = '[data-testid="select-option:Story"]';
-        this.issueTitle = 'input[name="title"]';
+        this.title = 'input[name="title"]';
         this.issueDescription = '.ql-editor';
         this.assignee = '[data-testid="select:userIds"]';
         this.assigneeLordGaben = '[data-testid="select-option:Lord Gaben"]';
@@ -24,12 +24,12 @@ class IssueModal {
             .trigger('click');
     }
 
-    editTitle(title) {
-        cy.get(this.issueTitle).type(title);
+    editTitle() {
+        cy.get(this.title).type('TEST_TITLE');
     }
 
-    editDescription(description) {
-        cy.get(this.issueDescription).type(description);
+    editDescription() {
+        cy.get(this.issueDescription).type('TEST_DESCRIPTION');
     }
 
     selectAssignee() {

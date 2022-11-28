@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker';
 
-class IssueEditMarily {
+class EditMarily {
     constructor() {
         this.issueDetailsModal = '[data-testid="modal:issue-details"]';
         this.modalConfirm = '[data-testid="modal:confirm"]';
-        this.editIssueType = '[data-testid="select:type"]';
-        this.issueType = '[data-testid="select-option:Story"]';
-        this.issueStatus = '[data-testid="select:status"]';
-        this.StatusDone = '[data-testid="select-option:Done"]';
+        this.editType = '[data-testid="select:type"]';
+        this.storyType = '[data-testid="select-option:Story"]';
+        this.editStatus = '[data-testid="select:status"]';
+        this.statusDone = '[data-testid="select-option:Done"]';
         this.editAssignees = '[data-testid="select:assignees"]';
         this.assigneeLord = '[data-testid="select-option:Lord Gaben"]';
         this.assigneeYoda = '[data-testid="select-option:Baby Yoda"]';
@@ -15,8 +15,8 @@ class IssueEditMarily {
         this.reporterRick = '[data-testid="select-option:Pickle Rick"]';
         this.editPriority = '[data-testid="select:priority"]';
         this.proiorityMedium = '[data-testid="select-option:Medium"]';
-        this.issueSummary = 'textarea[placeholder="Short summary"]';      
-        this.editIssueDescription = '.ql-editor';
+        this.textSummary = 'textarea[placeholder="Short summary"]';      
+        this.editDescription = '.ql-editor';
         this.trashIcon = '[data-testid="icon:trash"]';
         this.title = faker.word.adjective();
         this.description = faker.hacker.phrase();          
@@ -32,19 +32,19 @@ class IssueEditMarily {
 
     
 
-    selectIssueTypes() { 
-        cy.get(this.editIssueType).click('bottomRight');
-        cy.get(this.issueType)
+    selectType() { 
+        cy.get(this.editType).click('bottomRight');
+        cy.get(this.storyType)
         .trigger('mouseover')
         .trigger('click');
-        cy.get(this.editIssueType).should('contain', 'Story');
+        cy.get(this.editType).should('contain', 'Story');
 
     }
 
-    selectIssueStatus() {
-        cy.get(this.issueStatus).click('bottomRight');
-        cy.get(this.StatusDone).click();
-        cy.get(this.issueStatus).should('have.text', 'Done');
+    selectStatus() {
+        cy.get(this.editStatus).click('bottomRight');
+        cy.get(this.statusDone).click();
+        cy.get(this.editStatus).should('have.text', 'Done');
 
     }
 
@@ -70,10 +70,10 @@ class IssueEditMarily {
 
     }
 
-    issueUpdate() {
+    formUpdate() {
         this.getIssueDetailsModal().within(() => {        
-            this.selectIssueTypes();
-            this.selectIssueStatus();
+            this.selectType();
+            this.selectStatus();
             this.selectAssignees();
             this.selectReporter();
             this.selectPriority();
@@ -83,12 +83,12 @@ class IssueEditMarily {
     }
 
     changeTitle() {
-        cy.get(this.issueSummary).clear().type(this.title).blur();
+        cy.get(this.textSummary).clear().type(this.title).blur();
     }
 
     changeDescription() {
         cy.get('.ql-snow').click().should('not.exist');
-        cy.get(this.editIssueDescription).clear().type(this.description);
+        cy.get(this.editDescription).clear().type(this.description);
         cy.contains('button', 'Save')
         .click()
         .should('not.exist');        
@@ -96,7 +96,7 @@ class IssueEditMarily {
     }
     
     descriptionText() {
-        cy.get(this.issueSummary).should('have.text',this.title);
+        cy.get(this.textSummary).should('have.text',this.title);
 
     }
 
@@ -128,7 +128,7 @@ class IssueEditMarily {
 
     } 
 
-    issueDeleteSuccessful() {
+    validatesDeleteSuccessful() {
               
        this.deleteIssue();
        this.deleteConfirm();
@@ -142,4 +142,4 @@ class IssueEditMarily {
 
 }
 
-export default new IssueEditMarily();
+export default new EditMarily();

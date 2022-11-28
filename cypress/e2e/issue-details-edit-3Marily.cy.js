@@ -11,7 +11,7 @@
  *    Bonus: used random data generator library (faker.js)
  */
 
-import IssueEditMarily from "../pages/IssueEditMarily";
+import EditMarily from "../pages/EditMarily";
 
 /**
  * Workshop #16
@@ -33,34 +33,33 @@ import IssueEditMarily from "../pages/IssueEditMarily";
  * 1. Previously created method will have more selectors included in the object (for example, assignees are added)
  */
 
-describe('Issue details editing', () => {
+
+ describe('Issue details editing', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.url().should('eq', 'https://jira.ivorreic.com/project').then((url) => {
+    cy.url().should('eq', `${Cypress.env('baseUrl')}project`).then((url) => {
       cy.visit(url + '/board');
       cy.contains('This is an issue of type: Task.').click();
     });
-  });
-
-  
+  }); 
 
 
 
 
   it.only('Should update type, status, assignees, reporter, priority successfully', () => {
 
-    IssueEditMarily.issueUpdate();
+    EditMarily.formUpdate();
    
     const dataContains  = [ 
-      [IssueEditMarily.editIssueType,'Story'],
-      [IssueEditMarily.editAssignees, 'Baby Yoda'],
+      [EditMarily.editType,'Story'],
+      [EditMarily.editAssignees, 'Baby Yoda'],
       [IssueEditMarily.editAssignees, 'Lord Gaben']
     ]
 
     const dataText =  [
-      [IssueEditMarily.issueStatus, 'Done'],
-      [IssueEditMarily.editReporter, 'Pickle Rick'],
-      [IssueEditMarily.editPriority, 'Medium']
+      [EditMarily.editStatus, 'Done'],
+      [EditMarily.editReporter, 'Pickle Rick'],
+      [EditMarily.editPriority, 'Medium']
     ]
     
     //Task 1
@@ -75,16 +74,16 @@ describe('Issue details editing', () => {
     }
 
     const dataTask2 = [
-      [IssueEditMarily.editIssueType, 'Story'],
+      [IssueEditMarily.editType, 'Story'],
       [IssueEditMarily.editAssignees, 'Baby Yoda'],
       [IssueEditMarily.editAssignees, 'Lord Gaben'],
-      [IssueEditMarily.issueStatus, 'Done'],
+      [IssueEditMarily.editStatus, 'Done'],
       [IssueEditMarily.editReporter, 'Pickle Rick'],
       [IssueEditMarily.editPriority, 'Medium']
      
     ]
 
-    //task #2 adding if condition and combining two assertions into one
+    //Task #2 
     for (const [property, value] of dataTask2) {
       if (property === IssueEditMarily.editIssueType || property === IssueEditMarily.editAssignees)
         cy.get(property).should('contain', value);
@@ -98,12 +97,12 @@ describe('Issue details editing', () => {
   });
 
   it('Should update title, description successfully', () => {
-    IssueEditMarily.updateDescriptionTitle();
+    EditMarily.updateDescriptionTitle();
 
   });
 
   it('Should delete an issue successfully', () => {
-    IssueEditMarily.issueDeleteSuccessful();
+    EditMarily.validatesDeleteSuccessful();
 
   });
 
