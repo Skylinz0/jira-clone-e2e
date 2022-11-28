@@ -53,7 +53,7 @@ import EditMarily from "../pages/EditMarily";
     const dataContains  = [ 
       [EditMarily.editType,'Story'],
       [EditMarily.editAssignees, 'Baby Yoda'],
-      [IssueEditMarily.editAssignees, 'Lord Gaben']
+      [EditMarily.editAssignees, 'Lord Gaben']
     ]
 
     const dataText =  [
@@ -74,18 +74,18 @@ import EditMarily from "../pages/EditMarily";
     }
 
     const dataTask2 = [
-      [IssueEditMarily.editType, 'Story'],
-      [IssueEditMarily.editAssignees, 'Baby Yoda'],
-      [IssueEditMarily.editAssignees, 'Lord Gaben'],
-      [IssueEditMarily.editStatus, 'Done'],
-      [IssueEditMarily.editReporter, 'Pickle Rick'],
-      [IssueEditMarily.editPriority, 'Medium']
+      [EditMarily.editType, 'Story'],
+      [EditMarily.editAssignees, 'Baby Yoda'],
+      [EditMarily.editAssignees, 'Lord Gaben'],
+      [EditMarily.editStatus, 'Done'],
+      [EditMarily.editReporter, 'Pickle Rick'],
+      [EditMarily.editPriority, 'Medium']
      
     ]
 
     //Task #2 
     for (const [property, value] of dataTask2) {
-      if (property === IssueEditMarily.editIssueType || property === IssueEditMarily.editAssignees)
+      if (property === EditMarily.editType || property === EditMarily.editAssignees)
         cy.get(property).should('contain', value);
       else cy.get(property).should('have.text', value);
     } 
