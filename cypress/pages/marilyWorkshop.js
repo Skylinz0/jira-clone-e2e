@@ -5,9 +5,8 @@ class marilyWorkshop {
         this.issueModal = '[data-testid="modal:issue-create"]';
         this.issueType = '[data-testid="select:type"]';
         this.submitButton = 'button[type="submit"]';
-        this.errorTitle = '.sc-caSCKo';
-        this.textSummary = '#form-field-20';
-        this.bugtextSummary = '#form-field-32';
+        this.errorTitle = '[data-testid="form-field:title"]';
+        this.textSummary = '[data-testid="form-field:title"]';       
         this.issueBacklog = '[data-testid="board-list:backlog';
         this.iconTask = '[data-testid="icon:task"]';
         this.editBug = '[data-testid="select-option:Bug"]';
@@ -54,8 +53,8 @@ class marilyWorkshop {
     makeBug() {
         cy.get(this.issueType).click('bottomRight');
         cy.get(this.iconBug).should('be.visible');
-        cy.get(this.editBug).trigger('mouseover').trigger('click');
-        cy.get(this.bugtextSummary).type(this.title);      
+        cy.get(this.editBug).trigger('mouseover').trigger('click');        
+        cy.get(this.textSummary).type(this.title);      
 
     }
 
