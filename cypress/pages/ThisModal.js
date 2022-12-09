@@ -23,6 +23,14 @@ class ThisModal {
         return cy.get(this.issueModal);
     }
 
+    createNewModal() {
+        cy.intercept('GET','**/currentUser').as('currentUserApiRequest')
+        cy.url().should('eq', `${Cypress.env('baseUrl')}project/board`).then((url) => {
+          cy.wait('@currentUserApiRequest')
+          cy.visit(url + '/settings?modal-issue-create=true');
+        });
+    }
+
     selectIssueType() {
         cy.get(this.issueType).click('bottomRight');
         cy.get(this.issueTypeStory)
@@ -31,7 +39,7 @@ class ThisModal {
     }
 
     editTitle() {
-        cy.get(this.title).type('Delete this issue for this workshop');
+        cy.get(this.title).type('This issue for this workshop');
     }
     
     editDescription() {
@@ -60,7 +68,7 @@ class ThisModal {
 
     
     deleteIssue() {
-        cy.get(this.issueBacklog).should('contain','Delete this issue for this workshop').click();
+        cy.get(this.issueBacklog).should('contain',' This issue for this workshop').click();
         cy.get(`button ${this.trashIcon}`)
         .click();
   
@@ -74,7 +82,7 @@ class ThisModal {
     } 
 
     selectCancel() {
-        cy.get(this.issueBacklog).should('contain','Delete this issue for this workshop').click();
+        cy.get(this.issueBacklog).should('contain','This issue for this workshop').click();
         cy.get(`button ${this.trashIcon}`).click();
         
         cy.get(this.modalConfirm).contains('button', 'Cancel').click();
