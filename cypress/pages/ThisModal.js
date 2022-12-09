@@ -68,7 +68,7 @@ class ThisModal {
 
     
     deleteIssue() {
-        cy.get(this.issueBacklog).should('contain',' This issue for this workshop').click();
+        cy.get(this.issueBacklog).should('contain','p',' This issue for this workshop').click();
         cy.get(`button ${this.trashIcon}`)
         .click();
   

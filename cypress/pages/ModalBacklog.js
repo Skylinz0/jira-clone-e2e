@@ -25,7 +25,7 @@ class ModalBacklog {
     }
 
     selectEstimation() {
-        cy.get(this.editBacklog).should('contain', 'This issue for this workshop').click();          
+        cy.get(this.editBacklog).should('contain','p' ,'This issue for this workshop');          
         cy.contains("Original Estimate (hours)").next().get("div>input[placeholder='Number']").click();
         cy.get("div>input[placeholder='Number']").clear().type('10').click();
         cy.get(`button ${this.iconClose}`).click();
